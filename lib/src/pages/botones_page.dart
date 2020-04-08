@@ -1,16 +1,16 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class BotonesPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
       statusBarColor: Color.fromRGBO(52, 54, 101, 1.0),
-
     ));
+
     return Scaffold(
       body: new Stack(
         children: <Widget>[
@@ -18,7 +18,7 @@ class BotonesPage extends StatelessWidget {
           titulos(),
         ],
       ),
-      bottomNavigationBar: navegador(),
+      bottomNavigationBar: bottonNavigatorBarMio(context),
     );
   }
 
@@ -89,6 +89,7 @@ class BotonesPage extends StatelessWidget {
               ),
             ),
           ),
+          _botonesRedondeados(),
         ],
       ),
     );
@@ -96,12 +97,113 @@ class BotonesPage extends StatelessWidget {
 
   navegador() {
     return new BottomNavigationBar(
+        selectedItemColor: Colors.pink,
         items: <BottomNavigationBarItem>[
           new BottomNavigationBarItem(
-              icon: new Icon(Icons.calendar_today),
-            title: new Text("Calendario")
-          ),
-        ]
+              icon: new Icon(Icons.calendar_today), title: new Container()),
+          new BottomNavigationBarItem(
+              icon: new Icon(Icons.pie_chart_outlined), title: new Container()),
+          new BottomNavigationBarItem(
+              icon: new Icon(Icons.supervised_user_circle),
+              title: new Container()),
+        ]);
+  }
+
+  otroNavegador() {
+    var controller;
+
+    ///  new TabController(length: 3, vsync: this);
+    return new Material(
+      color: Colors.blueAccent,
+      child: TabBar(
+        controller: controller,
+        tabs: <Widget>[
+          new Tab(icon: new Icon(Icons.alarm)),
+          new Tab(icon: new Icon(Icons.watch_later)),
+          new Tab(icon: new Icon(Icons.airplanemode_active)),
+        ],
+      ),
+    );
+  }
+
+  bottonNavigatorBarMio(BuildContext context) {
+    return new Theme(
+        data: Theme.of(context).copyWith(
+            canvasColor: Color.fromRGBO(55, 57, 84, 1.0),
+            primaryColor: Colors.purpleAccent,
+            textTheme: Theme.of(context).textTheme.copyWith(
+                caption: TextStyle(color: Color.fromRGBO(116, 117, 152, 1.0)))),
+        child: new BottomNavigationBar(items: [
+          new BottomNavigationBarItem(
+              icon: new Icon(
+                Icons.calendar_today,
+                size: 30.0,
+              ),
+              title: new Container()),
+          new BottomNavigationBarItem(
+              icon: new Icon(
+                Icons.bubble_chart,
+                size: 30.0,
+              ),
+              title: new Container()),
+          new BottomNavigationBarItem(
+              icon: new Icon(
+                Icons.supervised_user_circle,
+                size: 30.0,
+              ),
+              title: new Container()),
+        ]));
+  }
+
+  _botonesRedondeados() {
+    return new Table(
+      children: [
+        new TableRow(children: [
+          _creaarBotonRedondeado(),
+          _creaarBotonRedondeado(),
+        ]),
+        new TableRow(children: [
+          _creaarBotonRedondeado(),
+          _creaarBotonRedondeado(),
+        ]),
+        new TableRow(children: [
+          _creaarBotonRedondeado(),
+          _creaarBotonRedondeado(),
+        ]),
+        new TableRow(children: [
+          _creaarBotonRedondeado(),
+          _creaarBotonRedondeado(),
+        ]),
+      ],
+    );
+  }
+
+  _creaarBotonRedondeado() {
+    return widget(
+      child: new Container(
+        height: 180.0,
+        margin: EdgeInsets.all(15.0),
+        decoration: new BoxDecoration(
+          color: Color.fromRGBO(62, 66, 107, 0.7),
+          borderRadius: BorderRadius.circular(20.0)
+        ),
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            new CircleAvatar(
+
+               child: new Icon(
+                 Icons.swap_calls,
+                 color: Colors.white,
+                  size: 30.0,
+              ),
+               radius: 35.0,
+               backgroundColor: Colors.pinkAccent,
+             ),
+            new Text("data", style: new TextStyle(color: Colors.pinkAccent),),
+          ],
+        ),
+      ),
     );
   }
 }
